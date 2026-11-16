@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-CN" data-lang="zh" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Confab · Just say it.</title>
+<meta name="description" content="Confab：你开口说，它来写。听写、翻译、随手记和会议，一个 Mac 应用。You talk, it writes: dictation, translation, quick notes and meetings in one Mac app.">
+<meta name="theme-color" content="#0a1119">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<script>
+/* Decide the render mode before first paint. Static (stacked, everything visible) is the default;
+   the scroll-driven stage is switched on only when motion is welcome and the scripts load. */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search);
+  d.classList.remove("no-js");
+  var lang = q.get("lang");
+  try { lang = lang || localStorage.getItem("confab-lang"); } catch (e) {}
+  if (lang === "en") { d.dataset.lang = "en"; d.lang = "en"; }
+  var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var short = window.innerHeight < 560;
+  var cine = q.get("static") !== "1" && (q.get("motion") === "1" || (!reduced && !short));
+  if (cine) {
+    d.classList.add("is-cine");
+    window.__confabFallback = function () { d.classList.remove("is-cine"); d.classList.add("is-static"); };
+    setTimeout(function () { if (!window.__confabReady) window.__confabFallback(); }, 4000);
+  } else d.classList.add("is-static");
+})();
+</script>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#after"><span class="zh" lang="zh-CN">跳过演示，直接看内容</span><span class="en" lang="en">Skip the film</span></a>
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="brand" href="#top" aria-label="Confab">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+        <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#40e2c8"/><stop offset=".55" stop-color="#6eb0ff"/><stop offset="1" stop-color="#9680ff"/></linearGradient></defs>
+        <g fill="url(#bg1)"><rect x="5.8" y="22.7" width="4" height="10.8" rx="2"/><rect x="11.6" y="17.6" width="4" height="20.9" rx="2"/><rect x="17.4" y="12.2" width="4" height="31.7" rx="2"/><rect x="23.2" y="14.5" width="4" height="27.2" rx="2"/><rect x="29" y="12.2" width="4" height="31.7" rx="2"/><rect x="34.8" y="17.6" width="4" height="20.9" rx="2"/><rect x="40.6" y="22.7" width="4" height="10.8" rx="2"/></g>
+        <circle cx="19.4" cy="22" r="1.5" fill="#0a1119"/><circle cx="31" cy="22" r="1.5" fill="#0a1119"/>
+        <path d="M25.2 1.2l1.1 3 3 1.1-3 1.1-1.1 3-1.1-3-3-1.1 3-1.1z" fill="#ffd68c"/>
+      </svg>
+      <span class="brand__word">Confab</span>
+    </a>
+    <nav class="site-nav" aria-label="页面导航 / Page">
+      <a href="#functions"><span class="zh" lang="zh-CN">功能</span><span class="en" lang="en">Functions</span></a>
+      <a href="#edition"><span class="zh" lang="zh-CN">个人版</span><span class="en" lang="en">Personal Edition</span></a>
+      <a href="#roadmap"><span class="zh" lang="zh-CN">路线</span><span class="en" lang="en">Roadmap</span></a>
+    </nav>
+    <div class="site-header__actions">
+      <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language / 切换语言"><span class="zh" lang="en">EN</span><span class="en" lang="zh-CN">中文</span></button>
+      <a class="btn btn--sm" href="#contact"><span class="btn__dot" aria-hidden="true"></span><span class="zh" lang="zh-CN">联系作者</span><span class="en" lang="en">Contact</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- ============================================================ the film -->
+<div class="journey" id="journey">
+  <div class="stage">
+    <canvas id="world" aria-hidden="true"></canvas>
+
+    <section class="scene scene--hero" id="s-hero" data-at="0,0,.05,.062" data-ch="0">
+      <div class="hero">
+        <p class="kicker"><span class="kicker__dot"></span>Confab 2.0 · <span class="zh" lang="zh-CN">个人版</span><span class="en" lang="en">Personal Edition</span></p>
+        <h1 class="hero__title">Just say it.</h1>
+        <p class="hero__sub"><span class="zh" lang="zh-CN">你开口说，它来写。听写、翻译、随手记和会议，都在一个 Mac 应用里。</span><span class="en" lang="en">You talk, it writes. Dictation, translation, quick notes and meetings in one Mac app.</span></p>
+        <img class="static-only hero__icon" src="assets/img/icon.png" width="128" height="128" alt="Confab 应用图标 / app icon">
+      </div>
+      <div class="wavebox wavebox--hero" data-wave aria-hidden="true"></div>
+      <p class="scroll-cue cine-only" aria-hidden="true"><span></span><span class="zh" lang="zh-CN">向下滚动</span><span class="en" lang="en">Scroll</span></p>
+    </section>
+
+    <section class="scene scene--say" id="s-speak" data-at=".062,.074,.14,.152" data-ch="1">
+      <div class="say">
+        <p class="chapter"><b>01</b><span class="zh" lang="zh-CN">说</span><span class="en" lang="en">Speak</span></p>
+        <h2 class="say__title"><span class="zh" lang="zh-CN">说话，<br>是把想法送出来最快的办法。</span><span class="en" lang="en">Speaking is the fastest way to get a thought out.</span></h2>
+        <p class="say__body"><span class="zh" lang="zh-CN">想法来得比手指快。打字的时候，你一边想一边删；说的时候，你只管往下说。</span><span class="en" lang="en">Thoughts come faster than fingers. Typing, you think and delete at the same time. Speaking, you just keep going.</span></p>
+      </div>
+      <div class="wavebox wavebox--low" data-wave aria-hidden="true"></div>
+    </section>
+
+    <section class="scene scene--duo" id="s-gap" data-at=".152,.164,.218,.23" data-ch="1">
+      <div class="say">
+        <h2 class="say__title"><span class="zh" lang="zh-CN">可是，说出来的话，<br>不等于你想写下的字。</span><span class="en" lang="en">But what you said is not what you meant to write.</span></h2>
+        <p class="say__body"><span class="zh" lang="zh-CN">口语里有“嗯”和“那个”，有说到一半又改口的句子，有一口气讲完的三件事。Confab 补的就是这一段：听清你说的，写下你要的。</span><span class="en" lang="en">Speech has ums, sentences you take back halfway, three points in one breath. Confab closes that gap: it hears what you said and writes what you meant.</span></p>
+      </div>
+      <div class="anchor anchor--xl" data-anchor><img src="assets/img/mascot-idle.png" width="440" height="440" alt="Confab 的吉祥物：七根音柱，两只眼睛，一颗金色的星 / The Confab mascot: seven bars, two eyes and a gold star" loading="lazy"></div>
+    </section>
+
+    <section class="scene scene--portal" id="s-write" data-at=".23,.242,.5,.512" data-ch="2" data-beats=".242,.317,.378,.439,.5">
+      <div class="portal">
+        <div class="portal__copy">
+          <p class="chapter"><b>02</b><span class="zh" lang="zh-CN">写</span><span class="en" lang="en">Write</span></p>
+          <div class="beats">
+            <div class="beat" data-b="0">
+              <h2><span class="zh" lang="zh-CN">口头语，去掉。</span><span class="en" lang="en">Fillers, gone.</span></h2>
+              <p><span class="zh" lang="zh-CN">“嗯”“那个”“就是”不会出现在你写的东西里。规整分三档：轻、中、重，改多少由你定。</span><span class="en" lang="en">No um, no like, no you-know in what you write. Three tidy-up levels (light, medium, heavy) decide how much is changed.</span></p>
+            </div>
+            <div class="beat" data-b="1">
+              <h2><span class="zh" lang="zh-CN">改口了，<br>只留最后的意思。</span><span class="en" lang="en">Changed your mind? Only the final version stays.</span></h2>
+              <p><span class="zh" lang="zh-CN">说到一半反悔，是说话的常态。打开“只留我最后的意思”，收回的那半句不会被写下来。</span><span class="en" lang="en">Taking something back halfway is how people talk. With “Keep only what I finally meant” on, the part you took back is not written.</span></p>
+            </div>
+            <div class="beat" data-b="2">
+              <h2><span class="zh" lang="zh-CN">几件事，自己排成列表。</span><span class="en" lang="en">Several points arrange themselves into a list.</span></h2>
+              <p><span class="zh" lang="zh-CN">重度规整把口述改成有条理的书面文字，也可以直接写成 Markdown：标题、列表、加粗。</span><span class="en" lang="en">Heavy tidy-up rewrites speech into organised text, and can write Markdown: headings, lists, bold.</span></p>
+            </div>
+            <div class="beat" data-b="3">
+              <h2><span class="zh" lang="zh-CN">说这种语言，<br>写下那种语言。</span><span class="en" lang="en">Speak one language, write another.</span></h2>
+              <p><span class="zh" lang="zh-CN">换一个按键，落在光标处的就是译文。直译、意译或自定义风格，14 种目标语言，可以配术语表。</span><span class="en" lang="en">Another key, and what lands at the cursor is the translation. Literal, natural or custom style; 14 target languages; a glossary.</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="portal__demo">
+          <figure class="demo demo--write">
+            <div class="capsule">
+              <span class="anchor anchor--cap" data-anchor><img src="assets/img/mascot-listen.png" width="440" height="440" alt="" loading="lazy"></span>
+              <span class="capsule__lvl cine-only" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="capsule__state">
+                <span data-state="0"><span class="zh" lang="zh-CN">在听</span><span class="en" lang="en">Listening</span></span>
+                <span data-state="1"><span class="zh" lang="zh-CN">整理中</span><span class="en" lang="en">Tidying</span></span>
+                <span data-state="2"><span class="zh" lang="zh-CN">已输入</span><span class="en" lang="en">Inserted</span></span>
+              </span>
+            </div>
+            <div class="sheet">
+              <div class="ex" data-b="0">
+                <p class="ex__label"><span class="zh" lang="zh-CN">你说的</span><span class="en" lang="en">What you said</span></p>
+                <p class="ex__said"><span class="zh" lang="zh-CN"><s>嗯，那个，就是，</s>方案我看完了，<s>呃，</s>整体没问题。</span><span class="en" lang="en"><s>Um, so, like,</s> I've read the proposal and<s>, uh,</s> it looks fine overall.</span></p>
+                <p class="ex__label ex__label--out"><span class="zh" lang="zh-CN">写下的</span><span class="en" lang="en">What gets written</span></p>
+                <p class="ex__out"><span class="zh" lang="zh-CN">方案我看完了，整体没问题。</span><span class="en" lang="en">I've read the proposal and it looks fine overall.</span><i class="caret"></i></p>
+              </div>
+              <div class="ex" data-b="1">
+                <p class="ex__label"><span class="zh" lang="zh-CN">你说的</span><span class="en" lang="en">What you said</span></p>
+                <p class="ex__said"><span class="zh" lang="zh-CN"><s>三点见……不对，我有事，改</s>四点吧。</span><span class="en" lang="en"><s>At three… no, I'm busy, make it</s> four.</span></p>
+                <p class="ex__label ex__label--out"><span class="zh" lang="zh-CN">写下的</span><span class="en" lang="en">What gets written</span></p>
+                <p class="ex__out"><span class="zh" lang="zh-CN">四点见。</span><span class="en" lang="en">At four.</span><i class="caret"></i></p>
+              </div>
+              <div class="ex" data-b="2">
+                <p class="ex__label"><span class="zh" lang="zh-CN">你说的</span><span class="en" lang="en">What you said</span></p>
+                <p class="ex__said"><span class="zh" lang="zh-CN">下周两件事，周二开会，周三交幻灯片。</span><span class="en" lang="en">Next week two things, meeting on Tuesday, slides due Wednesday.</span></p>
+                <p class="ex__label ex__label--out"><span class="zh" lang="zh-CN">写下的</span><span class="en" lang="en">What gets written</span></p>
+                <div class="ex__out ex__out--list"><p><span class="zh" lang="zh-CN">下周：</span><span class="en" lang="en">Next week:</span></p><ol><li><span class="zh" lang="zh-CN">周二开会</span><span class="en" lang="en">Meeting on Tuesday</span></li><li><span class="zh" lang="zh-CN">周三交幻灯片</span><span class="en" lang="en">Slides due Wednesday</span><i class="caret"></i></li></ol></div>
+              </div>
+              <div class="ex" data-b="3">
+                <p class="ex__label"><span class="zh" lang="zh-CN">你说的</span><span class="en" lang="en">What you said</span></p>
+                <p class="ex__said"><span class="zh" lang="zh-CN">这周五之前，能把报价发给我吗？</span><span class="en" lang="en">Could you send me the quote before this Friday?</span></p>
+                <p class="ex__label ex__label--out ex__label--tr"><span class="zh" lang="zh-CN">写下的 · 英文</span><span class="en" lang="en">What gets written · Chinese</span></p>
+                <p class="ex__out"><span class="zh" lang="zh-CN"><span lang="en">Could you send me the quote before this Friday?</span></span><span class="en" lang="en"><span lang="zh-CN">这周五之前，能把报价发给我吗？</span></span><i class="caret"></i></p>
+              </div>
+            </div>
+            <figcaption><span class="zh" lang="zh-CN">示意。例句按应用里的说明改写。</span><span class="en" lang="en">Illustration. Examples adapted from the app's own descriptions.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene scene--duo scene--bridge" id="s-bridge" data-at=".512,.524,.578,.59" data-ch="3">
+      <div class="say">
+        <p class="chapter"><b>03</b><span class="zh" lang="zh-CN">会</span><span class="en" lang="en">Meet</span></p>
+        <h2 class="say__title"><span class="zh" lang="zh-CN">一个人说，是输入。<br>几个人说，是会议。</span><span class="en" lang="en">One voice is input. Several voices are a meeting.</span></h2>
+        <p class="say__body"><span class="zh" lang="zh-CN">麦克风里的是“我”，电脑里传出来的是“对方”。Confab 一句一句记下来，需要的话同时翻译。</span><span class="en" lang="en">The microphone is “Me”. What the computer plays is “Them”. Confab writes it down sentence by sentence, with live translation if you want it.</span></p>
+      </div>
+      <div class="lanes" aria-hidden="true">
+        <span class="lanes__tag lanes__tag--me"><span class="zh" lang="zh-CN">我</span><span class="en" lang="en">Me</span></span>
+        <div class="wavebox wavebox--lanes" data-wave data-lanes></div>
+        <span class="lanes__tag lanes__tag--them"><span class="zh" lang="zh-CN">对方</span><span class="en" lang="en">Them</span></span>
+      </div>
+    </section>
+
+    <section class="scene scene--portal" id="s-meet" data-at=".59,.602,.75,.762" data-ch="3" data-beats=".602,.683,.75">
+      <div class="portal">
+        <div class="portal__copy">
+          <p class="chapter"><b>03</b><span class="zh" lang="zh-CN">会</span><span class="en" lang="en">Meet</span></p>
+          <div class="beats">
+            <div class="beat" data-b="0">
+              <h2><span class="zh" lang="zh-CN">会还在开，<br>记录已经在写。</span><span class="en" lang="en">The meeting is still running. The transcript is already there.</span></h2>
+              <p><span class="zh" lang="zh-CN">“我”和“对方”分开标注，每句话带时间，下面可以跟一行译文。完整录音可以留在本机。</span><span class="en" lang="en">“Me” and “Them” are labelled apart, each sentence has its time, and a translation can follow underneath. The full recording can be kept on your computer.</span></p>
+            </div>
+            <div class="beat" data-b="1">
+              <h2><span class="zh" lang="zh-CN">会没开完，就可以问。</span><span class="en" lang="en">Ask before the meeting is over.</span></h2>
+              <p><span class="zh" lang="zh-CN">回答只依据会上说过的话，每一条都标出时间。它还知道你事先交代的背景：长期记忆、可复用的场景、这一场的备注。回答问题的模型由你选，任何 OpenAI 兼容的服务都行，包括本机上的。</span><span class="en" lang="en">Answers rest on what was said, each with its time. It also knows the background you gave it: long-term memory, reusable scenes, notes for this one meeting. You choose the model that answers: any OpenAI-compatible service, including a local one.</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="portal__demo">
+          <figure class="demo demo--meet">
+            <div class="meetbar">
+              <span class="rec" aria-hidden="true"></span><span class="meetbar__time">00:34</span>
+              <span class="anchor anchor--sm" data-anchor><img src="assets/img/mascot-listen.png" width="440" height="440" alt="" loading="lazy"></span>
+              <span class="meetbar__src"><em class="t-me"><span class="zh" lang="zh-CN">我</span><span class="en" lang="en">Me</span></em><i class="lv lv--me"></i></span>
+              <span class="meetbar__src"><em class="t-them"><span class="zh" lang="zh-CN">对方</span><span class="en" lang="en">Them</span></em><i class="lv lv--them"></i></span>
+              <span class="meetbar__ask" data-show="3">✦ <span class="zh" lang="zh-CN">提问</span><span class="en" lang="en">Ask</span></span>
+            </div>
+            <div class="meetcols">
+              <ol class="tr">
+                <li data-show="0"><span class="who who--them"><span class="zh" lang="zh-CN">对方</span><span class="en" lang="en">Them</span><small>00:04</small></span><p>Thanks for joining. Shall we start with the pilot timeline?<q lang="zh-CN">感谢参加。我们先从试点的时间表开始好吗？</q></p></li>
+                <li data-show="1"><span class="who who--me"><span class="zh" lang="zh-CN">我</span><span class="en" lang="en">Me</span><small>00:11</small></span><p lang="zh-CN">可以。我们计划两周内把试点环境搭好，先用两百通脱敏录音。<q lang="en">Sure. We plan to have the pilot environment ready within two weeks, starting with two hundred anonymised recordings.</q></p></li>
+                <li data-show="2"><span class="who who--them"><span class="zh" lang="zh-CN">对方</span><span class="en" lang="en">Them</span><small>00:24</small></span><p>That works. Who owns the data transfer on your side?<q lang="zh-CN">可以。你们那边谁负责数据传输？</q></p></li>
+              </ol>
+              <div class="ask" data-show="3">
+                <p class="ask__q" data-show="3"><span class="zh" lang="zh-CN">目前定了什么？</span><span class="en" lang="en">What has been decided?</span></p>
+                <div class="ask__a" data-show="4">
+                  <p><span class="zh" lang="zh-CN">到现在两件事：</span><span class="en" lang="en">Two things so far:</span></p>
+                  <ol><li><span class="zh" lang="zh-CN">试点环境两周内搭好 <b>[00:11]</b></span><span class="en" lang="en">The pilot environment will be ready within two weeks <b>[00:11]</b></span></li><li><span class="zh" lang="zh-CN">先用两百通脱敏录音 <b>[00:11]</b></span><span class="en" lang="en">It starts with 200 anonymised recordings <b>[00:11]</b></span></li></ol>
+                  <p data-show="5"><span class="zh" lang="zh-CN">数据传输由谁负责，还没定 <b>[00:24]</b>。</span><span class="en" lang="en">Who owns the data transfer is still open <b>[00:24]</b>.</span></p>
+                </div>
+              </div>
+            </div>
+            <figcaption><span class="zh" lang="zh-CN">示意。内容与应用自带的演示数据一致。</span><span class="en" lang="en">Illustration. Same content as the app's built-in demo data.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene scene--portal scene--work" id="s-work" data-at=".762,.774,.948,.958" data-ch="4" data-beats=".774,.84,.892,.948">
+      <div class="portal">
+        <div class="portal__copy">
+          <p class="chapter"><b>04</b><span class="zh" lang="zh-CN">交给 agent</span><span class="en" lang="en">Hand it to an agent</span></p>
+          <p class="work__line"><span class="zh" lang="zh-CN">在会议里呼叫 Claude Code</span><span class="en" lang="en">Calling Claude Code from a meeting</span></p>
+          <div class="beats">
+            <div class="beat" data-b="0">
+              <h2><span class="zh" lang="zh-CN">会开完，<br>它变成一个文件夹。</span><span class="en" lang="en">When the meeting ends, it becomes a folder.</span></h2>
+              <p><span class="zh" lang="zh-CN">里面有读得懂的逐字稿、这场会的背景、写给 agent 的说明，还有三个现成的技能。都是普通文件，你可以自己改。</span><span class="en" lang="en">Inside: a readable transcript, the background for this meeting, instructions for the agent and three starter skills. Plain files you can edit.</span></p>
+            </div>
+            <div class="beat" data-b="1">
+              <h2><span class="zh" lang="zh-CN">点一下，<br>在 Claude Code 里打开。</span><span class="en" lang="en">One click opens it in Claude Code.</span></h2>
+              <p><span class="zh" lang="zh-CN">agent 一进来就知道这是哪场会、谁是谁、哪些文件不能动。也可以在终端或访达里打开；别的 agent 会去读 <code>AGENTS.md</code>。</span><span class="en" lang="en">The agent arrives knowing which meeting this is, who is who and which files to leave alone. Terminal and Finder work too; other agents read <code>AGENTS.md</code>.</span></p>
+            </div>
+            <div class="beat" data-b="2">
+              <h2><span class="zh" lang="zh-CN">纪要、待办、会后邮件，<br>都是技能。</span><span class="en" lang="en">Minutes, action items, the follow-up email: each is a skill.</span></h2>
+              <p><span class="zh" lang="zh-CN">agent 只写逐字稿和背景里有依据的内容，引用时标出时间，产出放进 <code>output/</code>。想要别的产出，再写一个技能就行。</span><span class="en" lang="en">The agent states only what the transcript or the background supports, cites the time, and puts its work in <code>output/</code>. Want something else? Write another skill.</span></p>
+            </div>
+          </div>
+          <p class="work__note"><span class="zh" lang="zh-CN">需要你自己装好 Claude Code。Confab 在这一步不调用任何模型，只把文件夹准备好。</span><span class="en" lang="en">Claude Code is installed separately. Confab calls no model at this step; it prepares the folder.</span></p>
+        </div>
+        <div class="portal__demo">
+          <figure class="demo demo--work">
+            <div class="winbar"><i></i><i></i><i></i><span class="winbar__title"><span class="zh" lang="zh-CN">会议文件夹</span><span class="en" lang="en">meeting folder</span></span>
+              <span class="anchor anchor--sm" data-anchor><img src="assets/img/mascot-done.png" width="440" height="440" alt="" loading="lazy"></span></div>
+            <div class="workcols">
+              <ul class="tree">
+                <li data-show="0"><code>transcript.md</code><small><span class="zh" lang="zh-CN">逐字稿，每句带时间</span><span class="en" lang="en">the meeting, one line per sentence</span></small></li>
+                <li data-show="0"><code>context.md</code><small><span class="zh" lang="zh-CN">背景、记忆、已问过的问题</span><span class="en" lang="en">background, memory, questions already asked</span></small></li>
+                <li data-show="1"><code>AGENTS.md</code><small><span class="zh" lang="zh-CN">写给 agent 的说明</span><span class="en" lang="en">instructions for the agent</span></small></li>
+                <li data-show="1"><code>CLAUDE.md</code></li>
+                <li data-show="2" class="tree__dir"><code>.claude/skills/</code>
+                  <ul><li><code>minutes/</code><small><span class="zh" lang="zh-CN">会议纪要</span><span class="en" lang="en">minutes</span></small></li><li><code>action-items/</code><small><span class="zh" lang="zh-CN">待办</span><span class="en" lang="en">action items</span></small></li><li><code>follow-up-email/</code><small><span class="zh" lang="zh-CN">会后邮件</span><span class="en" lang="en">follow-up email</span></small></li></ul></li>
+                <li data-show="2" class="tree__dir"><code>output/</code>
+                  <ul><li data-show="7" class="is-new"><code>minutes.md</code></li><li data-show="8" class="is-new"><code>action-items.md</code></li><li data-show="8" class="is-new"><code>follow-up-email.md</code></li></ul></li>
+              </ul>
+              <div class="term" data-show="3">
+                <p class="term__open" data-show="3"><span class="zh" lang="zh-CN">打开方式</span><span class="en" lang="en">Open in</span> <b>Claude Code</b> <span><span class="zh" lang="zh-CN">终端</span><span class="en" lang="en">Terminal</span></span> <span><span class="zh" lang="zh-CN">访达</span><span class="en" lang="en">Finder</span></span></p>
+                <p data-show="4"><i class="pr">$</i> claude</p>
+                <p data-show="6"><i class="pr">&gt;</i> <span class="zh" lang="zh-CN">写一份会议纪要</span><span class="en" lang="en">write the minutes</span></p>
+                <p data-show="7" class="term__r"><span class="zh" lang="zh-CN">读 transcript.md 和 context.md</span><span class="en" lang="en">Read transcript.md and context.md</span><br><span class="zh" lang="zh-CN">写入 output/minutes.md</span><span class="en" lang="en">Wrote output/minutes.md</span></p>
+                <p data-show="8"><i class="pr">&gt;</i> <span class="zh" lang="zh-CN">列出待办，再起草会后邮件</span><span class="en" lang="en">list the action items, then draft the follow-up email</span></p>
+                <p data-show="8" class="term__r"><span class="zh" lang="zh-CN">写入 output/action-items.md</span><span class="en" lang="en">Wrote output/action-items.md</span><br><span class="zh" lang="zh-CN">写入 output/follow-up-email.md</span><span class="en" lang="en">Wrote output/follow-up-email.md</span></p>
+              </div>
+            </div>
+            <figcaption><span class="zh" lang="zh-CN">示意。文件名与应用实际写出的一致；终端里的文字不是真实输出。</span><span class="en" lang="en">Illustration. File names match what the app writes; the terminal text is not real output.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene scene--end" id="s-end" data-at=".958,.97,," data-ch="5">
+      <div class="end">
+        <div class="anchor anchor--lg" data-anchor><img src="assets/img/mascot-done.png" width="440" height="440" alt="" loading="lazy"></div>
+        <h2 class="end__title">Just say it.</h2>
+        <p class="end__sub"><span class="zh" lang="zh-CN">剩下的，交给 Confab。</span><span class="en" lang="en">Confab takes it from there.</span></p>
+      </div>
+    </section>
+
+    <div class="hud cine-only" aria-hidden="true">
+      <span class="hud__label"><b data-hud-num>00</b><span data-hud-label></span></span>
+      <span class="hud__track"><span class="hud__fill" data-hud-fill></span><i style="left:7%"></i><i style="left:24%"></i><i style="left:52%"></i><i style="left:77%"></i><i style="left:96.5%"></i></span>
+      <a class="hud__skip" href="#after" tabindex="-1"><span class="zh" lang="zh-CN">跳过</span><span class="en" lang="en">Skip</span> ↓</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ the long page -->
+<div class="after" id="after">
+
+<section class="sec" id="functions">
+  <header class="sec__head"><p class="chapter"><b>05</b><span class="zh" lang="zh-CN">功能</span><span class="en" lang="en">What it does</span></p>
+    <h2><span class="zh" lang="zh-CN">四个功能，一个桌面伙伴。</span><span class="en" lang="en">Four functions and a desktop companion.</span></h2>
+    <p><span class="zh" lang="zh-CN">每个功能一个按键：按一下开始，再按一下结束。热词、文本替换、界面语言和外观，四个功能共用。</span><span class="en" lang="en">One key per function: tap to start, tap again to stop. Hotwords, text replacements, interface language and appearance are shared by all four.</span></p>
+  </header>
+
+  <article class="fn fn--teal" data-reveal>
+    <div class="fn__text">
+      <p class="fn__key"><kbd><span class="zh" lang="zh-CN">右</span><span class="en" lang="en">Right</span> ⌥</kbd></p>
+      <h3><span class="zh" lang="zh-CN">听写</span><span class="en" lang="en">Dictation</span></h3>
+      <p class="fn__lead"><span class="zh" lang="zh-CN">说完，整理好的文字落在光标处。</span><span class="en" lang="en">Speak; tidied text lands at your cursor.</span></p>
+      <ul>
+        <li><span class="zh" lang="zh-CN">三档规整：轻、中、重</span><span class="en" lang="en">Three tidy-up levels: light, medium, heavy</span></li>
+        <li><span class="zh" lang="zh-CN">“只留我最后的意思”：改口的部分不写</span><span class="en" lang="en">“Keep only what I finally meant”: what you took back is left out</span></li>
+        <li><span class="zh" lang="zh-CN">重度规整可以写成 Markdown</span><span class="en" lang="en">Heavy can write Markdown</span></li>
+        <li><span class="zh" lang="zh-CN">停下后大约一秒，文字出现；重度规整再慢两秒左右</span><span class="en" lang="en">Text arrives about a second after you stop; Heavy takes about two seconds more</span></li>
+      </ul>
+      <img class="fn__cap" src="assets/img/cap-dictate.webp" width="720" height="160" alt="听写时的录音胶囊 / The recording capsule during dictation" loading="lazy">
+    </div>
+    <figure class="fn__shot"><img src="assets/img/shot-dictation.webp" width="1400" height="1004" alt="听写页面截图：三档规整、Markdown 开关和“只留我最后的意思” / Screenshot of the Dictation page: three tidy-up levels, the Markdown switch and “Keep only what I finally meant”" loading="lazy"></figure>
+  </article>
+
+  <article class="fn fn--violet fn--flip" data-reveal>
+    <div class="fn__text">
+      <p class="fn__key"><kbd><span class="zh" lang="zh-CN">右</span><span class="en" lang="en">Right</span> ⌘</kbd></p>
+      <h3><span class="zh" lang="zh-CN">翻译</span><span class="en" lang="en">Translate</span></h3>
+      <p class="fn__lead"><span class="zh" lang="zh-CN">说完，译文落在光标处。</span><span class="en" lang="en">Speak; the translation lands at your cursor.</span></p>
+      <ul>
+        <li><span class="zh" lang="zh-CN">直译、意译，或用你自己的提示词</span><span class="en" lang="en">Literal, natural, or your own prompt</span></li>
+        <li><span class="zh" lang="zh-CN">14 种目标语言</span><span class="en" lang="en">14 target languages</span></li>
+        <li><span class="zh" lang="zh-CN">术语表：产品名、人名、行话的固定译法</span><span class="en" lang="en">Glossary: fixed translations for product names, people and jargon</span></li>
+      </ul>
+      <img class="fn__cap" src="assets/img/cap-translate.webp" width="720" height="160" alt="翻译时的录音胶囊 / The recording capsule during translation" loading="lazy">
+    </div>
+    <figure class="fn__shot"><img src="assets/img/shot-translate.webp" width="1400" height="768" alt="翻译页面截图：风格、目标语言和术语表 / Screenshot of the Translate page: style, target language and glossary" loading="lazy"></figure>
+  </article>
+
+  <article class="fn fn--amber" data-reveal>
+    <div class="fn__text">
+      <p class="fn__key"><kbd><span class="zh" lang="zh-CN">右</span><span class="en" lang="en">Right</span> ⇧</kbd></p>
+      <h3><span class="zh" lang="zh-CN">随手记</span><span class="en" lang="en">Quick Notes</span></h3>
+      <p class="fn__lead"><span class="zh" lang="zh-CN">说一句，存成一条笔记或一张清单。</span><span class="en" lang="en">Speak a thought; it is saved as a note or a checklist.</span></p>
+      <ul>
+        <li><span class="zh" lang="zh-CN">四种格式：原话、整理、待办、自定义</span><span class="en" lang="en">Four formats: verbatim, tidy, to-do, custom</span></li>
+        <li><span class="zh" lang="zh-CN">待办可以勾掉</span><span class="en" lang="en">To-dos can be ticked off</span></li>
+        <li><span class="zh" lang="zh-CN">按类型和日期筛选，可搜索，可导出 Markdown</span><span class="en" lang="en">Filter by type and date, search, export as Markdown</span></li>
+      </ul>
+      <img class="fn__cap" src="assets/img/cap-note.webp" width="720" height="160" alt="随手记时的录音胶囊 / The recording capsule during a quick note" loading="lazy">
+    </div>
+    <figure class="fn__shot"><img src="assets/img/shot-notes.webp" width="1400" height="749" alt="随手记页面截图：笔记格式和一张待办清单 / Screenshot of the Quick Notes page: note formats and a to-do list" loading="lazy"></figure>
+  </article>
+
+  <article class="fn fn--coral fn--flip" data-reveal>
+    <div class="fn__text">
+      <p class="fn__key"><kbd>⌃ ⌥ M</kbd></p>
+      <h3><span class="zh" lang="zh-CN">会议</span><span class="en" lang="en">Meeting</span></h3>
+      <p class="fn__lead"><span class="zh" lang="zh-CN">听完整场会，一句一句写下来。</span><span class="en" lang="en">Listens to the whole meeting and writes it down, sentence by sentence.</span></p>
+      <ul>
+        <li><span class="zh" lang="zh-CN">“我”（麦克风）和“对方”（系统声音）分开记录</span><span class="en" lang="en">“Me” (microphone) and “Them” (system audio), recorded apart</span></li>
+        <li><span class="zh" lang="zh-CN">实时翻译，译文跟在原文下面</span><span class="en" lang="en">Live translation under each sentence</span></li>
+        <li><span class="zh" lang="zh-CN">会中、会后都能提问，回答带出处时间</span><span class="en" lang="en">Questions during and after, answered with the time of each source</span></li>
+        <li><span class="zh" lang="zh-CN">三层记忆：长期记忆、场景、单场备注；不点确认，什么都不会被记下</span><span class="en" lang="en">Three layers of memory: long-term, scenes, notes for one meeting; nothing is saved without a click</span></li>
+        <li><span class="zh" lang="zh-CN">每场会议都是一个 agent 工作区</span><span class="en" lang="en">Every meeting is an agent workspace</span></li>
+      </ul>
+    </div>
+    <figure class="fn__shot fn__shot--pair">
+      <img src="assets/img/shot-meeting-live.webp" width="1400" height="685" alt="会议进行中的截图：左边是带译文的逐字稿，右边是提问和带时间的回答 / Screenshot of a meeting in progress: transcript with translation on the left, a question and its timed answer on the right" loading="lazy">
+      <img src="assets/img/shot-meeting-setup.webp" width="1400" height="890" alt="会议设置截图：选择麦克风和系统声音，开启实时翻译 / Screenshot of meeting setup: microphone and system audio, live translation" loading="lazy">
+    </figure>
+  </article>
+
+  <article class="buddy" data-reveal>
+    <div class="buddy__text">
+      <h3><span class="zh" lang="zh-CN">桌面伙伴</span><span class="en" lang="en">The desktop companion</span></h3>
+      <p class="fn__lead"><span class="zh" lang="zh-CN">应用图标上的七根音柱和那颗星，长出了两只眼睛。</span><span class="en" lang="en">The seven bars and the star of the app icon, with two eyes.</span></p>
+      <ul>
+        <li><span class="zh" lang="zh-CN">点一下，开始或结束听写</span><span class="en" lang="en">Click to start or finish dictation</span></li>
+        <li><span class="zh" lang="zh-CN">右键：翻译、随手记、会议</span><span class="en" lang="en">Right-click: translation, quick notes, meeting</span></li>
+        <li><span class="zh" lang="zh-CN">开会时点它，直接提问</span><span class="en" lang="en">Click during a meeting to ask a question</span></li>
+        <li><span class="zh" lang="zh-CN">可以拖到任何位置，靠到屏幕边会收起一半；不想要可以隐藏</span><span class="en" lang="en">Drag it anywhere; at a screen edge it tucks half away; hide it if you prefer</span></li>
+      </ul>
+    </div>
+    <div class="moods">
+      <figure><img src="assets/img/mascot-idle.png" width="440" height="440" alt="" loading="lazy"><figcaption><span class="zh" lang="zh-CN">待命</span><span class="en" lang="en">Idle</span></figcaption></figure>
+      <figure><img src="assets/img/mascot-listen.png" width="440" height="440" alt="" loading="lazy"><figcaption><span class="zh" lang="zh-CN">在听</span><span class="en" lang="en">Listening</span></figcaption></figure>
+      <figure><img src="assets/img/mascot-think.png" width="440" height="440" alt="" loading="lazy"><figcaption><span class="zh" lang="zh-CN">处理中</span><span class="en" lang="en">Working</span></figcaption></figure>
+      <figure><img src="assets/img/mascot-done.png" width="440" height="440" alt="" loading="lazy"><figcaption><span class="zh" lang="zh-CN">完成</span><span class="en" lang="en">Done</span></figcaption></figure>
+      <figure><img src="assets/img/mascot-error.png" width="440" height="440" alt="" loading="lazy"><figcaption><span class="zh" lang="zh-CN">出了问题</span><span class="en" lang="en">Problem</span></figcaption></figure>
+    </div>
+  </article>
+</section>
+
+<section class="sec" id="edition">
+  <header class="sec__head"><p class="chapter"><b>06</b><span class="zh" lang="zh-CN">个人版</span><span class="en" lang="en">Personal Edition</span></p>
+    <h2><span class="zh" lang="zh-CN">现在是个人版。能做什么，不能做什么，说清楚。</span><span class="en" lang="en">This is the Personal Edition. Here is what it does and what it does not.</span></h2>
+    <p><span class="zh" lang="zh-CN">当前版本 2.0.0，给一个人在自己的 Mac 上用。</span><span class="en" lang="en">Current version 2.0.0, made for one person on their own Mac.</span></p>
+  </header>
+  <div class="cols3">
+    <div class="card" data-reveal>
+      <h3><span class="zh" lang="zh-CN">适合谁</span><span class="en" lang="en">Good for</span></h3>
+      <ul class="ticks">
+        <li><span class="zh" lang="zh-CN">每天要写很多字的人：消息、文档、给 AI 的提示</span><span class="en" lang="en">People who write a lot every day: messages, documents, prompts</span></li>
+        <li><span class="zh" lang="zh-CN">在中文和英文之间来回切换的人</span><span class="en" lang="en">People who move between Chinese and English</span></li>
+        <li><span class="zh" lang="zh-CN">线上会议多，想留下逐字稿、随时能问的人</span><span class="en" lang="en">People with many online meetings who want a transcript they can question</span></li>
+        <li><span class="zh" lang="zh-CN">已经在用 Claude Code 这类 agent，想把会后的活交出去的人</span><span class="en" lang="en">People who already use an agent such as Claude Code and want to hand over the after-meeting work</span></li>
+      </ul>
+    </div>
+    <div class="card" data-reveal>
+      <h3><span class="zh" lang="zh-CN">它怎么运行</span><span class="en" lang="en">How it runs</span></h3>
+      <ul class="dots">
+        <li><span class="zh" lang="zh-CN">录音、逐字稿、笔记和记忆都存在你的电脑上，可以整体导出成一个 JSON 文件。</span><span class="en" lang="en">Recordings, transcripts, notes and memory are stored on your computer and can be exported as one JSON file.</span></li>
+        <li><span class="zh" lang="zh-CN">语音识别需要联网：声音会发给语音引擎，用的是你自己的服务密钥。</span><span class="en" lang="en">Speech recognition needs the network: audio is sent to the speech engine, using your own service key.</span></li>
+        <li><span class="zh" lang="zh-CN">回答问题的模型由你设置，可以是本机上的模型。</span><span class="en" lang="en">You set the model that answers questions; it can be one running on your machine.</span></li>
+        <li><span class="zh" lang="zh-CN">需要 macOS 13 或更新版本。</span><span class="en" lang="en">Needs macOS 13 or later.</span></li>
+      </ul>
+    </div>
+    <div class="card card--not" data-reveal>
+      <h3><span class="zh" lang="zh-CN">还做不到</span><span class="en" lang="en">Not yet</span></h3>
+      <ul class="crosses">
+        <li><span class="zh" lang="zh-CN">Windows 版（正在做）</span><span class="en" lang="en">A Windows version (in progress)</span></li>
+        <li><span class="zh" lang="zh-CN">账号、云同步、团队共享、管理后台</span><span class="en" lang="en">Accounts, cloud sync, team sharing, an admin console</span></li>
+        <li><span class="zh" lang="zh-CN">“对方”有几个人时，分不出谁是谁</span><span class="en" lang="en">Telling apart the people on the other side</span></li>
+        <li><span class="zh" lang="zh-CN">外放开会时的回声消除，建议戴耳机</span><span class="en" lang="en">Echo cancellation with speakers; headphones are recommended</span></li>
+        <li><span class="zh" lang="zh-CN">跨多场会议或带着文档来回答问题</span><span class="en" lang="en">Answering across several meetings or attached documents</span></li>
+        <li><span class="zh" lang="zh-CN">对存下的录音重新转写；内嵌终端</span><span class="en" lang="en">Re-transcribing a saved recording; an embedded terminal</span></li>
+        <li><span class="zh" lang="zh-CN">公开下载：目前只能从源码构建，仓库未公开</span><span class="en" lang="en">A public download: it is built from source and the repository is private</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="roadmap">
+  <header class="sec__head"><p class="chapter"><b>07</b><span class="zh" lang="zh-CN">路线</span><span class="en" lang="en">Roadmap</span></p>
+    <h2><span class="zh" lang="zh-CN">从一个人用，到一个组织用。</span><span class="en" lang="en">From one person to an organisation.</span></h2>
+    <p><span class="zh" lang="zh-CN">这是先后顺序，不是日期。企业版是计划，还没有开发；每一步做成了，才走下一步。</span><span class="en" lang="en">This is an order, not a calendar. The enterprise edition is a plan and is not built; each step has to work before the next begins.</span></p>
+  </header>
+  <ol class="road">
+    <li class="road__now" data-reveal><span class="road__n"><span class="zh" lang="zh-CN">今天</span><span class="en" lang="en">Today</span></span><h3><span class="zh" lang="zh-CN">个人版</span><span class="en" lang="en">Personal Edition</span></h3><p><span class="zh" lang="zh-CN">Mac 应用。数据在本机，语音服务密钥自备。</span><span class="en" lang="en">A Mac app. Data on your computer; you bring your own speech service key.</span></p></li>
+    <li data-reveal><span class="road__n"><span class="zh" lang="zh-CN">第 1 步</span><span class="en" lang="en">Step 1</span></span><h3><span class="zh" lang="zh-CN">团队试点</span><span class="en" lang="en">Team pilot</span></h3><p><span class="zh" lang="zh-CN">Windows 版和安装包。一个小团队每天用起来，共用同一份词库和场景，先不需要服务器。</span><span class="en" lang="en">A Windows version and installers. One small team uses it daily and shares a vocabulary and scenes, with no server yet.</span></p></li>
+    <li data-reveal><span class="road__n"><span class="zh" lang="zh-CN">第 2 步</span><span class="en" lang="en">Step 2</span></span><h3><span class="zh" lang="zh-CN">账号与同步</span><span class="en" lang="en">Accounts and sync</span></h3><p><span class="zh" lang="zh-CN">登录、设备之间同步、托管的语音与模型服务，不用再自己配密钥。</span><span class="en" lang="en">Sign-in, sync between devices, hosted speech and model services, so nobody configures keys.</span></p></li>
+    <li data-reveal><span class="road__n"><span class="zh" lang="zh-CN">第 3 步</span><span class="en" lang="en">Step 3</span></span><h3><span class="zh" lang="zh-CN">多租户企业版</span><span class="en" lang="en">Multi-tenant enterprise edition</span></h3><p><span class="zh" lang="zh-CN">每个组织一个互相隔离的空间：成员与角色、单点登录、团队共用的词库与记忆、管理后台、审计记录。</span><span class="en" lang="en">An isolated space per organisation: members and roles, single sign-on, team vocabulary and memory, an admin console, audit records.</span></p></li>
+    <li data-reveal><span class="road__n"><span class="zh" lang="zh-CN">第 4 步</span><span class="en" lang="en">Step 4</span></span><h3><span class="zh" lang="zh-CN">私有化部署</span><span class="en" lang="en">Private deployment</span></h3><p><span class="zh" lang="zh-CN">装进客户自己的环境，语音引擎和模型可以换成客户指定的。</span><span class="en" lang="en">Runs inside the customer's own environment, with the speech engine and the model replaceable.</span></p></li>
+  </ol>
+</section>
+
+<section class="sec sec--contact" id="contact">
+  <header class="sec__head"><p class="chapter"><b>08</b><span class="zh" lang="zh-CN">联系</span><span class="en" lang="en">Contact</span></p>
+    <h2><span class="zh" lang="zh-CN">想试用，或者想聊聊？</span><span class="en" lang="en">Want to try it, or talk about it?</span></h2>
+    <p><span class="zh" lang="zh-CN">Confab 由一位独立开发者制作。仓库目前没有公开，也没有公开的下载；可以在作者的网站上找到作者。</span><span class="en" lang="en">Confab is made by an individual developer. The repository is private and there is no public download; you can reach the author through their website.</span></p>
+  </header>
+  <a class="btn btn--lg" href="https://yanson-blog.vercel.app/en" target="_blank" rel="noopener"><span class="btn__dot" aria-hidden="true"></span><span class="zh" lang="zh-CN">去作者的网站</span><span class="en" lang="en">Visit the author's website</span> <span aria-hidden="true">↗</span></a>
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <p><b>Confab</b> 2.0.0 · <span class="zh" lang="zh-CN">个人版</span><span class="en" lang="en">Personal Edition</span> · Just say it.</p>
+  <p><span class="zh" lang="zh-CN">截图由应用用自带的演示数据生成；标注“示意”的画面是为了讲清楚功能而重画的。</span><span class="en" lang="en">Screenshots are rendered by the app from its built-in demo data; pictures marked “Illustration” are redrawn to explain a function.</span></p>
+</footer>
+
+<script src="assets/vendor/gsap.min.js" onerror="window.__confabFallback&&__confabFallback()"></script>
+<script src="assets/vendor/ScrollTrigger.min.js" onerror="window.__confabFallback&&__confabFallback()"></script>
+<script src="assets/site.js" onerror="window.__confabFallback&&__confabFallback()"></script>
+</body>
+</html>
